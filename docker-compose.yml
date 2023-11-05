@@ -2,10 +2,10 @@ version: "3"
 
 services:
     namenode:
-        image: strongpapazola/hadoop-namenode:3.3.4-java8
+        image: hamalrsy/hadoop-namenode:3.3.4-java8
         container_name: namenode
         hostname: namenode
-        # hostname: bigdata.bisa.ai
+        # hostname: bigdata.hamalrsy.id
         restart: always
         ports:
             - 9870:9870
@@ -20,9 +20,9 @@ services:
             - development
 
     datanode:
-        image: strongpapazola/hadoop-datanode:3.3.4-java8
+        image: hamalrsy/hadoop-datanode:3.3.4-java8
         container_name: datanode
-        hostname: bigdata.bisa.ai
+        hostname: bigdata.hamalrsy.id
         restart: always
         ports:
             - 9864:9864
@@ -39,10 +39,10 @@ services:
             - development
 
     resourcemanager:
-        image: strongpapazola/hadoop-resourcemanager:3.3.4-java8
+        image: hamalrsy/hadoop-resourcemanager:3.3.4-java8
         container_name: resourcemanager
         hostname: resourcemanager
-        # hostname: bigdata.bisa.ai
+        # hostname: bigdata.hamalrsy.id
         restart: always
         ports:
             - 8088:8088
@@ -56,10 +56,10 @@ services:
             - development
 
     nodemanager1:
-        image: strongpapazola/hadoop-nodemanager:3.3.4-java8
+        image: hamalrsy/hadoop-nodemanager:3.3.4-java8
         container_name: nodemanager
         hostname: nodemanager
-        # hostname: bigdata.bisa.ai
+        # hostname: bigdata.hamalrsy.id
         restart: always
         ports:
             - 8042:8042
@@ -72,10 +72,10 @@ services:
             - development
 
     historyserver:
-        image: strongpapazola/hadoop-historyserver:3.3.4-java8
+        image: hamalrsy/hadoop-historyserver:3.3.4-java8
         container_name: historyserver
         hostname: historyserver
-        # hostname: bigdata.bisa.ai
+        # hostname: bigdata.hamalrsy.id
         restart: always
         ports:
             - 8188:8188
@@ -90,7 +90,7 @@ services:
             - development
 
     spark-master:
-        image: strongpapazola/hadoop-spark-master:3.3.4-java8
+        image: hamalrsy/hadoop-spark-master:3.3.4-java8
         container_name: spark-master
         hostname: spark-master
         env_file:
@@ -103,7 +103,7 @@ services:
         networks:
             - development
     spark-worker-1:
-        image: strongpapazola/hadoop-spark-worker:3.3.4-java8
+        image: hamalrsy/hadoop-spark-worker:3.3.4-java8
         container_name: spark-worker-1
         hostname: spark-worker-1
         env_file:

@@ -1,5 +1,5 @@
 # FROM bde2020/spark-base:3.3.0-hadoop3.3
-FROM strongpapazola/hadoop-base:3.3.4-java8
+FROM hamalrsy/hadoop-base:3.3.4-java8
 
 LABEL maintainer="Gezim Sejdiu <g.sejdiu@gmail.com>, Giannis Mouchakis <gmouchakis@gmail.com>"
 

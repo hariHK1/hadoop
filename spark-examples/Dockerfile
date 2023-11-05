@@ -1,4 +1,4 @@
-FROM strongpapazola/hadoop-base:3.3.4-java8
+FROM hamalrsy/hadoop-base:3.3.4-java8
 	  
 COPY . /app/
 

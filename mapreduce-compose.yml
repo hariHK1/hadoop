@@ -2,7 +2,7 @@ version: "3"
 
 services:
     submit:
-        image: strongpapazola/hadoop-submit:3.3.4-java8
+        image: hamalrsy/hadoop-submit:3.3.4-java8
         container_name: submit
         hostname: submit
         # hostname: bigdata.bisa.ai
