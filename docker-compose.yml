@@ -1,126 +1,126 @@
 version: "3"
 
 services:
-  namenode:
-    image: strongpapazola/hadoop-namenode:3.3.4-java8
-    container_name: namenode
-    hostname: namenode
-    # hostname: bigdata.bisa.ai
-    restart: always
-    ports:
-      - 9870:9870
-      - 9000:9000
-    volumes:
-      - hadoop_namenode:/hadoop/dfs/name
-    environment:
-      - CLUSTER_NAME=mycluster
-    env_file:
-      - ./hadoop.env
-    networks:
-      - development
+    namenode:
+        image: strongpapazola/hadoop-namenode:3.3.4-java8
+        container_name: namenode
+        hostname: namenode
+        # hostname: bigdata.bisa.ai
+        restart: always
+        ports:
+            - 9870:9870
+            - 9000:9000
+        volumes:
+            - hadoop_namenode:/hadoop/dfs/name
+        environment:
+            - CLUSTER_NAME=mycluster
+        env_file:
+            - ./hadoop.env
+        networks:
+            - development
 
-  datanode:
-    image: strongpapazola/hadoop-datanode:3.3.4-java8
-    container_name: datanode
-    hostname: bigdata.bisa.ai
-    restart: always
-    ports:
-      - 9864:9864 
-      - 9866:9866
-      - 9867:9867
+    datanode:
+        image: strongpapazola/hadoop-datanode:3.3.4-java8
+        container_name: datanode
+        hostname: bigdata.bisa.ai
+        restart: always
+        ports:
+            - 9864:9864
+            - 9866:9866
+            - 9867:9867
 
-    volumes:
-      - hadoop_datanode:/hadoop/dfs/data
-    environment:
-      SERVICE_PRECONDITION: "117.53.45.158:9870"
-    env_file:
-      - ./hadoop.env
-    networks:
-      - development
-  
-  resourcemanager:
-    image: strongpapazola/hadoop-resourcemanager:3.3.4-java8
-    container_name: resourcemanager
-    hostname: resourcemanager
-    # hostname: bigdata.bisa.ai
-    restart: always
-    ports:
-      - 8088:8088
-      - 8031:8031
-      - 8032:8032
-    environment:
-      SERVICE_PRECONDITION: "117.53.45.158:9000 117.53.45.158:9870 117.53.45.158:9864"
-    env_file:
-      - ./hadoop.env
-    networks:
-      - development
+        volumes:
+            - hadoop_datanode:/hadoop/dfs/data
+        environment:
+            SERVICE_PRECONDITION: "192.168.43.200:9870"
+        env_file:
+            - ./hadoop.env
+        networks:
+            - development
 
-  nodemanager1:
-    image: strongpapazola/hadoop-nodemanager:3.3.4-java8
-    container_name: nodemanager
-    hostname: nodemanager
-    # hostname: bigdata.bisa.ai
-    restart: always
-    ports:
-      - 8042:8042
-      - 19888:19888
-    environment:
-      SERVICE_PRECONDITION: "117.53.45.158:9000 117.53.45.158:9870 117.53.45.158:9864 117.53.45.158:8088"
-    env_file:
-      - ./hadoop.env
-    networks:
-      - development
-  
-  historyserver:
-    image: strongpapazola/hadoop-historyserver:3.3.4-java8
-    container_name: historyserver
-    hostname: historyserver
-    # hostname: bigdata.bisa.ai
-    restart: always
-    ports:
-      - 8188:8188
-      - 10200:10200
-    environment:
-      SERVICE_PRECONDITION: "117.53.45.158:9000 117.53.45.158:9870 117.53.45.158:9864 117.53.45.158:8088"
-    volumes:
-      - hadoop_historyserver:/hadoop/yarn/timeline
-    env_file:
-      - ./hadoop.env
-    networks:
-      - development
+    resourcemanager:
+        image: strongpapazola/hadoop-resourcemanager:3.3.4-java8
+        container_name: resourcemanager
+        hostname: resourcemanager
+        # hostname: bigdata.bisa.ai
+        restart: always
+        ports:
+            - 8088:8088
+            - 8031:8031
+            - 8032:8032
+        environment:
+            SERVICE_PRECONDITION: "192.168.43.200:9000 192.168.43.200:9870 192.168.43.200:9864"
+        env_file:
+            - ./hadoop.env
+        networks:
+            - development
 
-  spark-master:
-    image: strongpapazola/hadoop-spark-master:3.3.4-java8
-    container_name: spark-master
-    hostname: spark-master
-    env_file:
-      - ./hadoop.env
-    ports:
-      - "8080:8080"
-      - "7077:7077"
-    environment:
-      - INIT_DAEMON_STEP=setup_spark
-    networks:
-      - development
-  spark-worker-1:
-    image: strongpapazola/hadoop-spark-worker:3.3.4-java8
-    container_name: spark-worker-1
-    hostname: spark-worker-1
-    env_file:
-      - ./hadoop.env
-    ports:
-      - "8081:8081"
-    environment:
-      - "SPARK_MASTER=spark://spark-master:7077"
-    networks:
-      - development
-  
+    nodemanager1:
+        image: strongpapazola/hadoop-nodemanager:3.3.4-java8
+        container_name: nodemanager
+        hostname: nodemanager
+        # hostname: bigdata.bisa.ai
+        restart: always
+        ports:
+            - 8042:8042
+            - 19888:19888
+        environment:
+            SERVICE_PRECONDITION: "192.168.43.200:9000 192.168.43.200:9870 192.168.43.200:9864 192.168.43.200:8088"
+        env_file:
+            - ./hadoop.env
+        networks:
+            - development
+
+    historyserver:
+        image: strongpapazola/hadoop-historyserver:3.3.4-java8
+        container_name: historyserver
+        hostname: historyserver
+        # hostname: bigdata.bisa.ai
+        restart: always
+        ports:
+            - 8188:8188
+            - 10200:10200
+        environment:
+            SERVICE_PRECONDITION: "192.168.43.200:9000 192.168.43.200:9870 192.168.43.200:9864 192.168.43.200:8088"
+        volumes:
+            - hadoop_historyserver:/hadoop/yarn/timeline
+        env_file:
+            - ./hadoop.env
+        networks:
+            - development
+
+    spark-master:
+        image: strongpapazola/hadoop-spark-master:3.3.4-java8
+        container_name: spark-master
+        hostname: spark-master
+        env_file:
+            - ./hadoop.env
+        ports:
+            - "8080:8080"
+            - "7077:7077"
+        environment:
+            - INIT_DAEMON_STEP=setup_spark
+        networks:
+            - development
+    spark-worker-1:
+        image: strongpapazola/hadoop-spark-worker:3.3.4-java8
+        container_name: spark-worker-1
+        hostname: spark-worker-1
+        env_file:
+            - ./hadoop.env
+        ports:
+            - "8081:8081"
+        environment:
+            - "SPARK_MASTER=spark://spark-master:7077"
+        networks:
+            - development
+
 volumes:
-  hadoop_namenode:
-  hadoop_datanode:
-  hadoop_historyserver:
+    hadoop_namenode:
+    hadoop_datanode:
+    hadoop_historyserver:
 
 networks:
-  development:
-    name: development
-    driver: bridge
+    development:
+        name: development
+        driver: bridge

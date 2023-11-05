@@ -1,22 +1,22 @@
 version: "3"
 
 services:
-  submit:
-    image: strongpapazola/hadoop-submit:3.3.4-java8
-    container_name: submit
-    hostname: submit
-    # hostname: bigdata.bisa.ai
-    # restart: always
-    environment:
-      SERVICE_PRECONDITION: "117.53.45.158:9000 117.53.45.158:9870 117.53.45.158:9864 117.53.45.158:8088"
-    env_file:
-      - ./hadoop.env
-    networks:
-      - development
-    # stdin_open: true 
-    # tty: true
-  
+    submit:
+        image: strongpapazola/hadoop-submit:3.3.4-java8
+        container_name: submit
+        hostname: submit
+        # hostname: bigdata.bisa.ai
+        # restart: always
+        environment:
+            SERVICE_PRECONDITION: "192.168.43.200:9000 192.168.43.200:9870 192.168.43.200:9864 192.168.43.200:8088"
+        env_file:
+            - ./hadoop.env
+        networks:
+            - development
+        # stdin_open: true
+        # tty: true
+
 networks:
-  development:
-    name: development
-    driver: bridge
+    development:
+        name: development
+        driver: bridge

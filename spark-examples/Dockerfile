@@ -2,7 +2,7 @@ FROM strongpapazola/hadoop-base:3.3.4-java8
 	  
 COPY . /app/
 
-ENV SPARK_MASTER_NAME 117.53.45.158
+ENV SPARK_MASTER_NAME 192.168.43.200
 ENV SPARK_MASTER_PORT 7077
 
 # ENV SPARK_APPLICATION_PYTHON_LOCATION /app/wordcount.py
@@ -15,5 +15,5 @@ ENV SPARK_MASTER_PORT 7077
 
 ENV PYSPARK_PYTHON python3
 # CMD ["/spark/bin/spark-submit","--master","spark://117.53.45.158:7077","/app/wordcount.py","/input/mapreducedataset.txt"]
-CMD ["/spark/bin/spark-submit","--master","spark://117.53.45.158:7077","/app/upload.py"]
+CMD ["/spark/bin/spark-submit","--master","spark://192.168.43.200:7077","/app/upload.py"]
 # CMD ["/spark/bin/spark-submit","--master","spark://117.53.45.158:7077","/app/spark-sample-notif.py"]
